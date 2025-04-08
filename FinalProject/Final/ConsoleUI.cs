@@ -1,5 +1,7 @@
 namespace Final;
 
+using Spectre.Console;
+
 public class ConsoleUI {
     FileSaver fileSaver;
 
@@ -10,17 +12,41 @@ public class ConsoleUI {
     public void Show() {
         string command; 
 
-        do {
-            
-            string recipeName = AskForInput("Enter recipe name: ");
+        var mode = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("What would you like to do?")
+                .AddChoices(new[] {
+                    "Add a Recipe", 
+                    "Search for a Recipe", 
+                    "Show All Recipes", 
+                    "Show Grocery List",
+                    "End"
+                })
+        );
 
-            string sourceName = AskForInput("Enter source of recipe (name or online): ");
+        if(mode == "Add a Recipe") {
+            do {
+                
+                string recipeName = AskForInput("Enter recipe name: ");
 
-            fileSaver.AppendLine(recipeName + ":" + sourceName);
+                string sourceName = AskForInput("Enter source of recipe (name or online): ");
 
-            command = AskForInput("Enter command (end or continue): ");
+                fileSaver.AppendLine(recipeName + ":" + sourceName);
 
-        } while(command != "end");
+                command = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("What would you like to do?")
+                        .AddChoices(new[] {
+                            "Add a Recipe", 
+                            "Search for a Recipe", 
+                            "Show All Recipes", 
+                            "Show Grocery List",
+                            "End"
+                    })
+                );
+
+            } while(command != "End");
+        }
 
         Console.Write("Program ended");
     }
