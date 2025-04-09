@@ -24,10 +24,10 @@ public class Recipe {
     }
 }
 
-public class GroceryList {
+/*public class GroceryList {
     public string ItemName { get; }
 
     public GroceryList(string name) {
         this.ItemName = name;
     }
-}
+}*/

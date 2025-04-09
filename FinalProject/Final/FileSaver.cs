@@ -3,7 +3,7 @@ namespace Final;
 using System.IO;
 
 public class FileSaver {
-    string fileName;
+    public string fileName;
 
     public FileSaver(string fileName) {
         this.fileName = fileName;
